@@ -8,4 +8,5 @@ import com.example.lianxi01.bean.Detailbean;
 
 public interface IMainListener {
     void show(Detailbean detailbean);
+    void show(String string);
 }
