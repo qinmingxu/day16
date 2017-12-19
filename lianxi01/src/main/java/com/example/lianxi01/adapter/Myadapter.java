@@ -97,11 +97,13 @@ public class Myadapter extends BaseExpandableListAdapter{
                 notifyDataSetChanged();
             }
         });
+
+
         return view;
     }
 
     @Override
-    public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View view;
         final ChildViewHolder holder;
         if(convertView==null){
@@ -160,6 +162,23 @@ public class Myadapter extends BaseExpandableListAdapter{
                 }
                 listBean.setNum(num);
                 setPriceAndCount();
+                notifyDataSetChanged();
+            }
+        });
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<GetCartsbean.DataBean.ListBean> listBeen = child.get(groupPosition);
+                if(listBeen.size()>0){
+                    listBeen.remove(childPosition);
+                }
+                if (listBeen.size() == 0) {
+                    child.remove(groupPosition);
+                    group.remove(groupPosition);
+                }
+                setPriceAndCount();
+                ((SecondActivity) context).setAllChecked(isAllGroupCbChecked());
+
                 notifyDataSetChanged();
             }
         });
